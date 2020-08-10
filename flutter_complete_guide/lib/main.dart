@@ -6,7 +6,7 @@ class Person {
   int age;
   String name;
 
-  Person({this.age = 30, this.name});
+  Person({this.age = 20, this.name});
 }
 
 void main() {
