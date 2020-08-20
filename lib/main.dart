@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //material google base'li dizaynlar içeriyor
 //buraya pubspec.yamldeki depenciesdeki flutterdan dolayı ulaşabiliyoruz
 import './question.dart';
+import './answer.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,8 +28,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'Whats\'s your favorite color?',
-      'What\'s your favorite animal?',
+      {
+        'questionText': 'Whats\'s your favorite color?',
+        'answers': ['Red', 'Blue', 'Green', 'Orange']
+      },
+      {
+        'questionText': 'What\'s your favorite animal?',
+        'answers': ['Snake', 'Zebra', 'Dog', 'Cat']
+      },
+      {
+        'questionText': 'Who\'s your favorite instructor?',
+        'answers': ['Max', 'Halley', 'Basak', 'Ali']
+      },
     ];
 
     return MaterialApp(
@@ -38,23 +49,11 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Question(questions[_questionIndex]),
-            RaisedButton(
-              child: Text("Answer 1"),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text("Answer 2"),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text("Answer 3"),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text("Answer 4"),
-              onPressed: _answerQuestion,
-            ),
+            Question(questions[_questionIndex]['questionText']),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
